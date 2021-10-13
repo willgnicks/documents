@@ -6,31 +6,31 @@
 
 ##### 1、设置IPMI地址
 
-##### ![image-20210615154023089](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154023089.png)
+##### ![image-20210615154023089](/Users/gnicks/Library/Application Support/typora-user-images/image-202106151540230
 
 
 
-![image-20210615154219177](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154219177.png)
+![image-20210615154219177](image-20210615154219177.png)
 
 ##### 2、WEB登录IPMI管理页面
 
-![image-20210615154249444](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154249444.png)
+![image-20210615154249444](image-20210615154249444.png)
 
 ##### 3、查看硬件信息
 
-![image-20210615154638447](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154638447.png)
+![image-20210615154638447](image-20210615154638447.png)
 
 ##### 4、查看风扇转速
 
-![image-20210615154657017](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154657017.png)
+![image-20210615154657017](image-20210615154657017.png)
 
 ##### 5、修改登陆的用户名及密码
 
-![image-20210615154707580](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154707580.png)
+![image-20210615154707580](image-20210615154707580.png)
 
 ##### 6、远程控制服务器
 
-![image-20210615154724410](/Users/gnicks/Library/Application Support/typora-user-images/image-20210615154724410.png)
+![image-20210615154724410](image-20210615154724410.png)
 
 点击后会从服务器上下载一个JAVA启动工具（jnlp文件)，要求有JRE环境，JRE8即可（不支持M1芯片）
 
