@@ -1,3 +1,5 @@
+# Redis
+
 ```shell
 docker run -p 6371:6379 -p 16371:16379 --name redis-1 -v /mydata/redis/node-1/data:data -v /mydata/redis/node-1/conf/redis.conf:/etc/redis/redis.conf -d --net redis --ip 172.38.0.11 redis redis-server /etc/redis/redis.conf
 
@@ -7,14 +9,12 @@ docker run -p 6371:6379 -p 16371:16379 --name redis-1 \
     -d --net redis --ip 172.38.0.11 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
     
     
-    for port in $(seq 1 6);\
+for port in $(seq 1 6);\
 docker run -p 637${port}:6379 -p 1667${port}:16379 --name redis-${port} \
 -v /mydata/redis/node-${port}/data:/data \
 -v /mydata/redis/node-${port}/conf/redis.conf:/etc/redis/redis.conf \
 -d --net redis --ip 172.38.0.1${port} redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
 ```
-
-
 
 ```shell
 # 创建网卡
@@ -59,4 +59,3 @@ done
 docker exec -it redis-1 /bin/sh #redis默认没有bash
 redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 172.38.0.14:6379 172.38.0.15:6379 172.38.0.16:6379  --cluster-replicas 1
 ```
-

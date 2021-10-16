@@ -1,5 +1,16 @@
 # Django + uWSGI + Nginx
 
+- [Django + uWSGI + Nginx](#django--uwsgi--nginx)
+  - [(前提) 已搭建python环境并创建好venv虚拟环境，参考python搭建](#前提-已搭建python环境并创建好venv虚拟环境参考python搭建)
+  - [一、上传代码](#一上传代码)
+    - [1. 使用scp将文件上传至服务器](#1-使用scp将文件上传至服务器)
+    - [2. 使用git下载代码，具体方法参照git使用方法](#2-使用git下载代码具体方法参照git使用方法)
+  - [二、创建uwsgi.ini配置文件](#二创建uwsgiini配置文件)
+  - [三、配置django的setting.py](#三配置django的settingpy)
+  - [四、安装nginx](#四安装nginx)
+  - [五、进入venv环境](#五进入venv环境)
+  - [六、开启nginx](#六开启nginx)
+
 ## (前提) 已搭建python环境并创建好venv虚拟环境，参考python搭建
 
 ## 一、上传代码
@@ -9,8 +20,6 @@
 ```shell
 scp -r 文件夹本地绝对路径 需上传的绝对路径
 ```
-
-
 
 ### 2. 使用git下载代码，具体方法参照git使用方法
 
@@ -29,7 +38,7 @@ processes=2  # 处理进程数
 threads=2    # 线程数
 max-requests=5000  # 最大请求量 避免内存溢出
 buffer-size=65536  # 缓存大小
-master=True	# 是否为主线程
+master=Tru  # 是否为主线程
 vacuum=True  # 服务器退出清除环境，删除socket和pid文件
 
 home=/data/leatest # venv环境绝对路径
@@ -37,7 +46,7 @@ pidfile=/opt/project.pid # 服务进程文件路径
 daemonize=/opt/project.log # django日志路径
 ```
 
-## 三、配置django setting.py
+## 三、配置django的setting.py
 
 ```python
 # 配置静态文件路径
@@ -49,12 +58,10 @@ mkdir /data/leatest/static/
 python3 manage.py collectstatic
 ```
 
-
-
 ## 四、安装nginx
 
 ```shell
-#	 yum安装
+# yum安装
 yum -y install nginx
 #  源码安装
 tar -zvxf nginx-1.12.0.tar.gz  #解压源码
@@ -79,8 +86,6 @@ location /static {
 
 ```
 
-
-
 ## 五、进入venv环境
 
 ```shell
@@ -90,14 +95,12 @@ source venv目录/bin/activate
 uwsgi --ini /opt/project/uwsgi.ini   # 绝对路径
 #  查看uwsgi是否启动
 ps -aux |grep uwsgi
-#	 重启uwsgi
+#  重启uwsgi
 uwsgi --reload /scripts/uwsgi.ini
 #  停止uwsgi
 uwsgi --stop /scripts/uwsgi.ini
 
 ```
-
-
 
 ## 六、开启nginx
 
@@ -109,4 +112,3 @@ uwsgi --stop /scripts/uwsgi.ini
 # 重启nginx
 /usr/local/nginx/sbin/nginx -s restart
 ```
-

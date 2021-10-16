@@ -1,26 +1,77 @@
 # Python
 
+- [Python](#python)
+  - [Linux源码安装](#linux源码安装)
+  - [pip使用](#pip使用)
+    - [替换pip源在.pip文件夹下的pip.conf配置文件中](#替换pip源在pip文件夹下的pipconf配置文件中)
+    - [一键安装环境（推荐在虚拟环境中操作）](#一键安装环境推荐在虚拟环境中操作)
+    - [requirements.txt内容](#requirementstxt内容)
+    - [virtualenv虚拟环境](#virtualenv虚拟环境)
+    - [安装setuptools](#安装setuptools)
+    - [问题](#问题)
+
 ---
 
-**问题**
+## Linux源码安装
 
 ```shell
-## pip3升级后产生的问题
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py --force-reinstall
-##卸载python3
-rpm -qa|grep python3|xargs rpm -ev --allmatches --nodeps       卸载pyhton3
-whereis python3 |xargs rm -frv           删除所有残余文件 成功卸载！
-whereis python3       查看现有安装的python3
+
+# 下载源码文件
+wget http://npm.taobao.org/mirrors/python/3.9.2/Python-3.9.2.tar.xz
+
+# 或者将Python-3.9.2.tar.xz上传至虚拟机
+scp Python-3.9.2.tar.xz root@ip:/root
+
+# 解压python源码
+tar -xvf Python-3.9.2.tar.xz
+
+# 进入源码目录
+cd Python-3.9.2
+
+# 安装python到指定目录，prefix相当于将软件安装到该募路下
+./configure --enable-optimizations --prefix=/usr/local/python3.9 --with-ssl 
+
+# 编译
+make && make install
+
+# 设置软链接
+ln -s /usr/local/python3.9/bin/python3  /usr/bin/python3
+ln -s /usr/local/python3.9/bin/pip3 /usr/bin/pip3
+
 ```
-
-
 
 ---
 
-依赖环境
+## pip使用
 
-```markdown
+### 替换pip源在.pip文件夹下的pip.conf配置文件中
+
+```shell
+# 创建文件夹
+mkdir ~/.pip
+# 创建配置文件
+vi pip.conf
+# pip配置文件粘贴国内源
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+use-mirrors = true
+mirrors = https://pypi.tuna.tsinghua.edu.cn/simple
+trusted-host = https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+### 一键安装环境（推荐在虚拟环境中操作）
+
+```shell
+# 一键安装库
+pip3 install -r requirements.txt
+# 一键导出库，导出文件位置位于当前pwd路径下
+pip3 freeze > requirements.txt
+```
+
+### requirements.txt内容
+
+```properties
 # requirement.txt
 asgiref==3.3.4
 backcall==0.2.0
@@ -46,69 +97,57 @@ wcwidth==0.2.5
 
 ```
 
+---
 
+### virtualenv虚拟环境
+
+```shell
+# 安装virtualenv
+pip3 install virtualenv
+
+# 设置软链接
+ln -s /usr/local/python3.9/bin/virtualenv /usr/bin/virtualenv
+
+# 创建虚拟环境
+virtualenv [环境名]
+python3 -m virtualenv [环境名]
+
+# 激活虚拟环境
+source 环境名/bin/activate
+
+# 退出虚拟环境
+deactivate
+```
 
 ---
 
-## 安装： 
+### 安装setuptools
 
 ```shell
-### 操作系统centos 
-# 下载源码文件
-wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz
-
-# 或者将Python-3.9.2.tar.xz上传至虚拟机
-
-## 安装依赖
-yum install zlib-devel
-
-# 解压
-tar -xvf Python-3.9.2.tar.xz
-
-# 进入源码目录
-
-# 切换目录/opt下
-cd /usr/local/Python-3.9.2/
-
-# 配置
-./configure --enable-optimizations --prefix=/usr/local/python3 --with-ssl 
-# 编译
-make && make install
-# 设置软链接
-ln -s /usr/local/python3/bin/python3  /usr/bin/python3
-
-# 安装依赖
-yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
 # 安装setuptool
 wget --no-check-certificate  https://pypi.python.org/packages/source/s/setuptools/setuptools-19.6.tar.gz#md5=c607dd118eae682c44ed146367a17e26
-
+# 解压
 tar -zvxf setuptools-19.6.tar.gz
 cd setuptools-19.6
-ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
-# 安装virtulenv
-pip3 install virtualenv
-# 设置软链接
-ln -s /usr/local/python3/bin/virtualenv /usr/bin/virtualenv
-# 创建虚拟环境
-virtualenv -p /usr/bin/python3 文件夹名
-
-pip3 install -r requirements.txt
-# 解压
-tar -xf Python-3.9.2.tar.xz
-# 进入目录安装
-cd Python-3.9.2
-./configure --with-ssl
-make && make install
-# 安装venv
-pip3 install virtualenv
-# 
-virtualenv 项目名
-source 项目名/bin/activate 进入虚拟环境
-deactivate	退出虚拟环境
-
-
-# 创建项目目录并进入
-mkdir -p /data/warehouse && cd  /data/warehouse
+# 安装
+python3 setip.py
 
 ```
 
+### 问题
+
+```shell
+# pip3升级后产生的问题
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py --force-reinstall
+
+# 卸载python3
+rpm -qa|grep python3|xargs rpm -ev --allmatches --nodeps
+
+# 删除所有残余文件 成功卸载！   
+whereis python3 |xargs rm -frv  
+
+# 查看现有安装的python3        
+whereis python3    
+   
+```
