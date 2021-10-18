@@ -12,25 +12,25 @@
 - 修改网卡配置文件
   
   ```shell
-  > cd /etc/sysconfig/network-scripts  进入目录
-  >
-  > vi ifcfg-对应网卡名 修改网卡文件
-  >
-  > 内容：
-  >
-  > 设置ip
-  >
-  > IPADDR=""
-  >
-  > NETMASK="255.255.255.0"    设置子网掩码
-  >
-  > GATEWAY=""     设置网关
-  >
-  > BOOTPROTO="static" 静态IP
-  >
-  > ONBOOT="yes" 开机自启动
-  >
-  > NM_CONTROLLED="no" 取消NetworkManager权限
+  cd /etc/sysconfig/network-scripts  进入目录
+
+  vi ifcfg-对应网卡名 修改网卡文件
+
+  内容：
+
+  设置ip
+
+  IPADDR=""
+
+  NETMASK="255.255.255.0"    设置子网掩码
+
+  GATEWAY=""     设置网关
+
+  BOOTPROTO="static" 静态IP
+
+  ONBOOT="yes" 开机自启动
+
+  NM_CONTROLLED="no" 取消NetworkManager权限
   ```
 
 - 修改NetworkManager的配置文件
@@ -52,6 +52,8 @@
   >systemctl restart network.service
   >
   >service network restart
+
+--------
 
 ## 配置yum源、安装依赖、升级依赖
 
@@ -79,6 +81,8 @@ yum -y install gcc wget curl zlib-devel bzip2-devel openssl-devel ncurses-devel 
 yum upgrade
 
 ```
+
+--------
 
 ## 防火墙命令
 
