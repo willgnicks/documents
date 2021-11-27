@@ -27,6 +27,16 @@ chsh -s /bin/zsh
 # 下载oh_my_zsh
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+# 设置omz路径
+sed -i '/^export ZSH.*/cexport ZSH="/root/.oh-my-zsh"' ~/.oh-my-zsh/templates/zshrc.zsh-template
+
+# 设置随机主题
+sed -i '/^ZSH_THEME.*/cZSH_THEME="random"' ~/.oh-my-zsh/templates/zshrc.zsh-template
+
+# 追加配置文件
+echo 'source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.oh-my-zsh/templates/zshrc.zsh-template
+
 # 复制启动sh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 ```
@@ -41,17 +51,15 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax
 
 # 下载德古拉主题
 git clone https://github.com/dracula/zsh.git ~/.zsh/zsh-master
-wget https://github.com/dracula/zsh/archive/refs/heads/master.zip ~/.zsh/
+wget -P ~/.zsh/ https://github.com/dracula/zsh/archive/refs/heads/master.zip
 unzip master.zip
 
-# 追加配置文件
-echo 'source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.zshrc
 # 创建快捷方式/软连接
 ln -s ~/.zsh/zsh-master/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
-# 设置随机主题
-sed -i '/^ZSH_THEME.*/cZSH_THEME="random"' ~/.zshrc
+
 # 生效配置文件
 source ~/.zshrc
+
 # macOS可以下载iterm的dracula配色，在iterm中选择配色
 git clone https://github.com/dracula/iterm.git
 ```
