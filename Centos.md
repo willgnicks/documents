@@ -13,23 +13,23 @@
   
   ```shell
   cd /etc/sysconfig/network-scripts  进入目录
-
+  
   vi ifcfg-对应网卡名 修改网卡文件
-
+  
   内容：
-
+  
   设置ip
-
+  
   IPADDR=""
-
+  
   NETMASK="255.255.255.0"    设置子网掩码
-
+  
   GATEWAY=""     设置网关
-
+  
   BOOTPROTO="static" 静态IP
-
+  
   ONBOOT="yes" 开机自启动
-
+  
   NM_CONTROLLED="no" 取消NetworkManager权限
   ```
 
@@ -114,3 +114,10 @@ yum upgrade
 >
 > 9、停止防火墙
 > systemctl stop firewalld
+
+## 常用工具
+
+```sh
+yum install -y zsh wget locate netstat dig iostat finger lsof
+```
+

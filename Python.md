@@ -102,22 +102,61 @@ wcwidth==0.2.5
 ### virtualenv虚拟环境
 
 ```shell
-# 安装virtualenv
+# 1. 安装virtualenv
 pip3 install virtualenv
 
-# 设置软链接
+# 2. 设置软链接
 ln -s /usr/local/python3.9/bin/virtualenv /usr/bin/virtualenv
 
-# 创建虚拟环境
+# 3. 创建虚拟环境
 virtualenv [环境名]
 python3 -m virtualenv [环境名]
 
-# 激活虚拟环境
+# 4. 激活虚拟环境
 source 环境名/bin/activate
 
-# 退出虚拟环境
+# 5. 退出虚拟环境
 deactivate
 ```
+
+### virtualenv_wrapper虚拟环境管理
+
+```less
+# 1. 安装virtualenv_wrapper
+pip3 install virtualenvwrapper
+# 2. 配置worken_home
+echo 'export WORKON_HOME=~/.virtualenvs\nexport VIRTUALENVWRAPPER_PYTHON=/usr/local/python3.9/bin/python3.9\nexport VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3.9/bin/virtualenv\nsource /usr/local/python3.9/bin/virtualenvwrapper.sh' >> ~/.zshrc
+# 3. 查看环境中虚拟环境
+workon
+# 4. 新建虚拟环境
+mkvirtualenv [虚拟环境名]
+mkvirtualenv --python=[/other/python/you/installed] [虚拟环境名] # 指定python解释器
+# 5. 运行切换虚拟环境
+workon [虚拟环境名]
+# 6. 退出虚拟环境
+deactivate
+# 7. 删除虚拟环境
+rmvirtualenv [虚拟环境名]
+
+```
+
+
+
+### 配置说明
+
+| 参数                                                         | 说明                           |
+| ------------------------------------------------------------ | ------------------------------ |
+| export WORKON_HOME=~/.virtualenvs                            | 配置虚拟环境的生成路径         |
+| export VIRTUALENVWRAPPER_PYTHON=/usr/local/python3.9/bin/python3.9 | 配置环境中默认的python解释器   |
+| VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3.9/bin/virtualenv | 配置环境中默认的virtualenv路径 |
+| source /usr/local/python3.9/bin/virtualenvwrapper.sh         | 配置环境的执行脚本             |
+
+- 如果需要在bash中使用，修改~/.bashrc文件
+- 如果需要在zsh中使用，修改~/.zshrc文件
+
+
+
+
 
 ---
 
