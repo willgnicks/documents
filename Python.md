@@ -20,23 +20,20 @@
 wget http://npm.taobao.org/mirrors/python/3.9.2/Python-3.9.2.tar.xz
 
 # 或者将Python-3.9.2.tar.xz上传至虚拟机
-scp Python-3.9.2.tar.xz root@ip:/root
+scp Python-3.9.2.tar.xz root@ip:/usr/local | cd /usr/local
 
-# 解压python源码
-tar -xvf Python-3.9.2.tar.xz
-
-# 进入源码目录
-cd Python-3.9.2
+# 解压python源码 # 进入源码目录
+tar -xvf Python-3.9.2.tar.xz | cd Python-3.9.2
 
 # 安装python到指定目录，prefix相当于将软件安装到该募路下
-./configure --enable-optimizations --prefix=/usr/local/python3.9 --with-ssl 
+./configure --enable-optimizations --prefix=/usr/local/python3 --with-ssl 
 
 # 编译
 make && make install
 
 # 设置软链接
-ln -s /usr/local/python3.9/bin/python3  /usr/bin/python3
-ln -s /usr/local/python3.9/bin/pip3 /usr/bin/pip3
+ln -s /usr/local/python3/bin/python3  /usr/bin/python3
+ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
 
 ```
 
@@ -48,16 +45,9 @@ ln -s /usr/local/python3.9/bin/pip3 /usr/bin/pip3
 
 ```shell
 # 创建文件夹
-mkdir ~/.pip
-# 创建配置文件
-vi pip.conf
-# pip配置文件粘贴国内源
-[global]
-index-url = https://pypi.tuna.tsinghua.edu.cn/simple
-[install]
-use-mirrors = true
-mirrors = https://pypi.tuna.tsinghua.edu.cn/simple
-trusted-host = https://pypi.tuna.tsinghua.edu.cn/simple
+mkdir /usr/local/.pip | cd /usr/local/.pip
+# 创建配置文件 并 pip配置文件粘贴国内源
+echo '[global]\nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple\n[install]\nuse-mirrors = true\nmirrors = https://pypi.tuna.tsinghua.edu.cn/simple\ntrusted-host = https://pypi.tuna.tsinghua.edu.cn/simple' >> pip.conf
 ```
 
 ### 一键安装环境（推荐在虚拟环境中操作）
@@ -106,7 +96,7 @@ wcwidth==0.2.5
 pip3 install virtualenv
 
 # 2. 设置软链接
-ln -s /usr/local/python3.9/bin/virtualenv /usr/bin/virtualenv
+ln -s /usr/local/python3/bin/virtualenv /usr/bin/virtualenv
 
 # 3. 创建虚拟环境
 virtualenv [环境名]
@@ -117,6 +107,9 @@ source 环境名/bin/activate
 
 # 5. 退出虚拟环境
 deactivate
+
+echo '#java environment\nexport JAVA_HOME=/usr/local/jdk1.8.0_301\nexport CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar\nexport PATH=$PATH:${JAVA_HOME}/bin\n# maven enviro\nexport MAVEN_HOME=/usr/local/maven3.6\nexport PATH=$MAVEN_HOME/bin:$PATH' >> ~/.bash_profile
+
 ```
 
 ### virtualenv_wrapper虚拟环境管理
@@ -125,7 +118,7 @@ deactivate
 # 1. 安装virtualenv_wrapper
 pip3 install virtualenvwrapper
 # 2. 配置worken_home
-echo 'export WORKON_HOME=~/.virtualenvs\nexport VIRTUALENVWRAPPER_PYTHON=/usr/local/python3.9/bin/python3.9\nexport VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3.9/bin/virtualenv\nsource /usr/local/python3.9/bin/virtualenvwrapper.sh' >> ~/.zshrc
+echo 'export WORKON_HOME=/usr/local/.virtualenvs\nexport VIRTUALENVWRAPPER_PYTHON=/usr/local/python3/bin/python3\nexport VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3/bin/virtualenv\nsource /usr/local/python3/bin/virtualenvwrapper.sh' >> ~/.bash_profile
 # 3. 查看环境中虚拟环境
 workon
 # 4. 新建虚拟环境
@@ -146,10 +139,10 @@ rmvirtualenv [虚拟环境名]
 
 | 参数                                                         | 说明                           |
 | ------------------------------------------------------------ | ------------------------------ |
-| export WORKON_HOME=~/.virtualenvs                            | 配置虚拟环境的生成路径         |
-| export VIRTUALENVWRAPPER_PYTHON=/usr/local/python3.9/bin/python3.9 | 配置环境中默认的python解释器   |
-| VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3.9/bin/virtualenv | 配置环境中默认的virtualenv路径 |
-| source /usr/local/python3.9/bin/virtualenvwrapper.sh         | 配置环境的执行脚本             |
+| export WORKON_HOME=/usr/local/.virtualenvs                   | 配置虚拟环境的生成路径         |
+| export VIRTUALENVWRAPPER_PYTHON=/usr/local/python3/bin/python3 | 配置环境中默认的python解释器   |
+| VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3/bin/virtualenv | 配置环境中默认的virtualenv路径 |
+| source /usr/local/python3/bin/virtualenvwrapper.sh           | 配置环境的执行脚本             |
 
 - 如果需要在bash中使用，修改~/.bashrc文件
 - 如果需要在zsh中使用，修改~/.zshrc文件

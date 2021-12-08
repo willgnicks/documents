@@ -26,19 +26,19 @@ chsh -s /bin/zsh
 ```shell
 # 下载oh_my_zsh
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+git clone git://github.com/robbyrussell/oh-my-zsh.git /usr/local/.oh-my-zsh
 
 # 设置omz路径
-sed -i '/^export ZSH.*/cexport ZSH="/root/.oh-my-zsh"' ~/.oh-my-zsh/templates/zshrc.zsh-template
+sed -i '/^export ZSH.*/cexport ZSH="/usr/local/.oh-my-zsh"' /usr/local/.oh-my-zsh/templates/zshrc.zsh-template
 
 # 设置随机主题
-sed -i '/^ZSH_THEME.*/cZSH_THEME="random"' ~/.oh-my-zsh/templates/zshrc.zsh-template
+sed -i '/^ZSH_THEME.*/cZSH_THEME="random"' /usr/local/.oh-my-zsh/templates/zshrc.zsh-template
 
 # 追加配置文件
-echo 'source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.oh-my-zsh/templates/zshrc.zsh-template
+echo 'source /usr/local/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> /usr/local/.oh-my-zsh/templates/zshrc.zsh-template
 
 # 复制启动sh
-cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+cp /usr/local/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 ```
 
 
@@ -47,15 +47,15 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 ```shell
 # 下载zsh高亮插件
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting /usr/local/.zsh/zsh-syntax-highlighting
 
 # 下载德古拉主题
-git clone https://github.com/dracula/zsh.git ~/.zsh/zsh-master
-wget -P ~/.zsh/ https://github.com/dracula/zsh/archive/refs/heads/master.zip
+git clone https://github.com/dracula/zsh.git /usr/local/.zsh/zsh-master
+wget -P /usr/local/.zsh/ https://github.com/dracula/zsh/archive/refs/heads/master.zip
 unzip master.zip
 
 # 创建快捷方式/软连接
-ln -s ~/.zsh/zsh-master/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
+ln -s /usr/local/.zsh/zsh-master/dracula.zsh-theme /usr/local/.oh-my-zsh/themes/dracula.zsh-theme
 
 # 生效配置文件
 source ~/.zshrc

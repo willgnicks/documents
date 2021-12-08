@@ -1,14 +1,14 @@
 # Maven
 
-## 1、安装
+## 安装
 
-### 1.1 windows安装
+###  windows安装
 
-### 1.2 linux安装
+###  linux安装
 
 + yum安装
 
-  ```java
+  ```sh
   yum install maven
   ```
 
@@ -17,26 +17,19 @@
 + 源码安装
 
   ```shell
-  # 1. 进入想要安装的目录
-  cd /usr/local/
-  # 2. 下载
-  wget https://dlcdn.apache.org/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz
-  # 3. 解压
-  tar -zxvf apache-maven-3.8.3-bin.tar.gz
-  # 4. 修改配置文件
-  vim ~/.zshrc
-  # 5. 配置
-  export M2_HOME=/Users/itkey/mac/Runtime/apache-maven-3.6.3
-  export PATH=$PATH:$M2_HOME/bin
-  # 6.使其生效
-  source .zshrc
+  # 1. 下载
+  wget -P /usr/local/ https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz 
+  # 2. 解压
+  cd /usr/local/; tar -zxvf apache-maven-3.8.4-bin.tar.gz
+  # 3. 配置软连接（快捷方式）
+  ln -s /usr/local/apache-maven-3.8.4/bin/mvn /usr/bin/mvn
   ```
-
+  
   
 
-### 1.3 macOs安装
+### macOs安装
 
-+ 进入官网 http://maven.apache.org/download.cgi
++ 进入官网 [官网](http://maven.apache.org/download.cgi)
 
 + 下载后解压到你想要的位置，可随意。这里我的位置是：
   **/Users/gnicks/documents/Runtime/apache-maven-3.6.3**
